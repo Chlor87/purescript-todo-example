@@ -8,12 +8,14 @@ module Todo.Ctx
   , _name
   , _desc
   , _done
+  , _ixDone
   ) where
 
 import Prelude
 
 import Data.Either (hush)
-import Data.Lens (Lens')
+import Data.Lens (Lens', Traversal')
+import Data.Lens.Index (ix)
 import Data.Lens.Record (prop)
 import Data.LocalStorage (getItem, setItem)
 import Data.Maybe (Maybe(..), fromMaybe)
@@ -41,6 +43,7 @@ type TodoCtx =
 emptyTodo :: Todo
 emptyTodo = { name: "", desc: "", done: false }
 
+-- optics
 _name :: ∀ a r. Lens' { name :: a | r } a
 _name = prop (Proxy :: Proxy "name")
 
@@ -50,6 +53,10 @@ _desc = prop (Proxy :: Proxy "desc")
 _done :: ∀ a r. Lens' { done :: a | r } a
 _done = prop (Proxy :: Proxy "done")
 
+_ixDone :: forall a r. Int -> Traversal' (Array { done :: a | r }) a
+_ixDone idx = ix idx <<< _done
+
+-- context
 todoCtx :: ReactContext TodoCtx
 todoCtx = unsafePerformEffect $ createContext { todos: [], setTodos: mempty }
 

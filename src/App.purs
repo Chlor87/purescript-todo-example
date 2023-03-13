@@ -10,7 +10,15 @@ import Data.Tuple (Tuple)
 import Effect (Effect)
 import React.Basic.DOM (a, css, div, li, nav, text, ul)
 import React.Basic.Events (handler_)
-import React.Basic.Hooks (Component, JSX, component, fragment, keyed, useContext, (/\))
+import React.Basic.Hooks
+  ( Component
+  , JSX
+  , component
+  , fragment
+  , keyed
+  , useContext
+  , (/\)
+  )
 import React.Basic.Hooks as R
 import Todo.AddEdit (mkTodoAddEdit)
 import Todo.Ctx (emptyTodo, todoCtx)
@@ -61,7 +69,7 @@ mkNav =
         , style: css { backgroundColor: "#333" }
         , children:
             [ div
-                { className: "container-fluid"
+                { className: "container"
                 , style: css { justifyContent: "flex-start" }
                 , children:
                     [ a
