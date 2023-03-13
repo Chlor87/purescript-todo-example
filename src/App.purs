@@ -10,18 +10,10 @@ import Data.Tuple (Tuple)
 import Effect (Effect)
 import React.Basic.DOM (a, css, div, li, nav, text, ul)
 import React.Basic.Events (handler_)
-import React.Basic.Hooks
-  ( Component
-  , JSX
-  , component
-  , fragment
-  , keyed
-  , useContext
-  , (/\)
-  )
+import React.Basic.Hooks (Component, JSX, component, fragment, keyed, (/\))
 import React.Basic.Hooks as R
 import Todo.AddEdit (mkTodoAddEdit)
-import Todo.Ctx (emptyTodo, todoCtx)
+import Todo.Ctx (emptyTodo, useTodos)
 import Todo.List (mkTodoList)
 
 mkView :: Component Unit
@@ -30,7 +22,7 @@ mkView = do
   todoAddEdit <- mkTodoAddEdit
   component "View" \_ -> R.do
     router <- useRouter
-    { todos } <- useContext todoCtx
+    { todos } <- useTodos
     pure $ case router.route of
       Todo List -> todoList unit
       Todo Add -> todoAddEdit { todo: emptyTodo, isEdit: false }

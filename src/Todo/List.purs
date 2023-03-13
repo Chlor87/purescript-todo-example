@@ -22,13 +22,13 @@ import React.Basic.DOM
   , tr_
   )
 import React.Basic.Events (handler_)
-import React.Basic.Hooks (Component, component, keyed, useContext)
+import React.Basic.Hooks (Component, component, keyed)
 import React.Basic.Hooks as R
-import Todo.Ctx (_ixDone, todoCtx)
+import Todo.Ctx (_ixDone, useTodos)
 
 mkTodoList :: Component Unit
 mkTodoList = component "TodoList" \_ -> R.do
-  { todos, setTodos } <- useContext todoCtx
+  { todos, setTodos } <- useTodos
   { navigate } <- useRouter
   pure $ div
     { className: "row mt-5"

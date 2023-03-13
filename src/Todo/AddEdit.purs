@@ -12,9 +12,9 @@ import Effect (Effect)
 import React.Basic.DOM (button, css, div, h1, input, label, text)
 import React.Basic.DOM.Events (targetValue)
 import React.Basic.Events (handler, handler_)
-import React.Basic.Hooks (Component, JSX, component, useContext, useState, (/\))
+import React.Basic.Hooks (Component, JSX, component, useState, (/\))
 import React.Basic.Hooks as R
-import Todo.Ctx (Todo, _desc, _name, todoCtx)
+import Todo.Ctx (Todo, _desc, _name, useTodos)
 
 textField :: String -> String -> (String -> Effect Unit) -> JSX
 textField name value update = div
@@ -38,7 +38,7 @@ textField name value update = div
 mkTodoAddEdit :: Component ({ todo :: Todo, isEdit :: Boolean })
 mkTodoAddEdit = component "TodoAddEdit" \{ todo: todo', isEdit } -> R.do
   todo /\ setTodo <- useState todo'
-  { setTodos } <- useContext todoCtx
+  { setTodos } <- useTodos
   { navigate, route } <- useRouter
   pure $ div
     { className: "row mt-5"
