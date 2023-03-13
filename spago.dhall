@@ -12,7 +12,8 @@ to generate this file without the comments in this block.
 -}
 { name = "purescript-todo-example"
 , dependencies =
-  [ "console"
+  [ "arrays"
+  , "console"
   , "effect"
   , "either"
   , "integers"
@@ -25,6 +26,7 @@ to generate this file without the comments in this block.
   , "react-basic"
   , "react-basic-dom"
   , "react-basic-hooks"
+  , "refs"
   , "routing-duplex"
   , "simple-json"
   , "tuples"
